@@ -2,6 +2,13 @@
 #include <dirent.h>
 #include <sys/stat.h>
 
+typedef struct	s_timelist
+{
+	char *name;
+	timespec time;
+	t_timelist *next;
+}				t_timelist;
+
 int main()
 {
 	DIR *dir;
@@ -13,7 +20,7 @@ int main()
 	while(dp)
 	{
 		stat(dp->d_name,&buf);
-		printf("%s,%ld\n",dp->d_name,buf.st_mtime);
+		printf("%s,%ld\n",dp->d_name,buf.st_mtime.tv_sec);
 		dp = readdir(dir);
 	}
 }
